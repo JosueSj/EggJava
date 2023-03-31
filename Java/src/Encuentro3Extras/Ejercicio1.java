@@ -11,12 +11,18 @@ public class Ejercicio1 {
     
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        int min, hora, dia;
+        int min, hora, dia, minut;
         
         System.out.println("Ingrese los minutos: ");
         min = input.nextInt();
         
-        hora = 60*
+        
+        hora = min / 60;
+        dia = hora / 24;
+        hora = hora % 24;
+        minut = min%60;
+        
+        System.out.println(min + " minutos son equivalentes a " + dia + " días y " + hora + " horas " + minut + " Minutos");
         
        
     }

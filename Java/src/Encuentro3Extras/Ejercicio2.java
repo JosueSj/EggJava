@@ -6,7 +6,7 @@ Utilizar sólo una variable auxiliar.
  */
 package Encuentro3Extras;
 
-public class NewMain {
+public class Ejercicio2 {
   
     public static void main(String[] args) {
 
