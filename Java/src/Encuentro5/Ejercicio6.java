@@ -6,21 +6,18 @@ orrectos, es decir, están entre el 1 y el 9.
  */
 package Encuentro5;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Ejercicio6 {
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        int tamanio;
         boolean resultado;
-        System.out.println("Ingrese el tamnio del cuadrado: ");
-        tamanio = input.nextInt();
-        int [][] matriz = new int [tamanio][tamanio];
+        int [][] matriz = new int[3][3];
         llenarMatriz(matriz);
         mostrarMatriz(matriz);
-        resultado = esMagico(matriz, tamanio);
+        resultado = esMagico(matriz);
         if(resultado == true){
             System.out.println("La matriz es magica");
         }else{
@@ -30,15 +27,38 @@ public class Ejercicio6 {
         
         
     }
+    
     public static void llenarMatriz(int [][] matriz){
-        Random random = new Random();
+    int[] numeros = {1,2,3,4,5,6,7,8,9};
+    Random rand = new Random();
+    for (int i = numeros.length - 1; i > 0; i--) {
+        int j = rand.nextInt(i + 1);
+        int aux = numeros[i];
+        numeros[i] = numeros[j];
+        numeros[j] = aux;
+    }
+    int contador = 0;
+    System.out.println("Matriz");
+    for (int i = 0; i < matriz.length; i++) {
+        for (int j = 0; j < matriz.length; j++) {
+            matriz[i][j] = numeros[contador];
+            contador++;
+        }            
+    }
+}
+    /*
+    public static void llenarMatriz(int [][] matriz){
+        int[] numeros = {1,2,3,4,5,6,7,8,9};
+        int contador = 0;
+        Collections.shuffle(Arrays.asList(numeros));
         System.out.println("Matriz");
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz.length; j++) {
-                matriz[i][j] = random.nextInt(9);                
+                matriz[i][j] = numeros[contador];
+                contador++;
             }            
         }
-    }
+    }*/
     
     public static void mostrarMatriz(int[][] matriz){
         for (int[] fila : matriz) {
@@ -49,7 +69,7 @@ public class Ejercicio6 {
         }
     }
     
-    public static boolean esMagico(int[][]matriz, int tamanio){
+    public static boolean esMagico(int[][]matriz){
         boolean valido;
         int sumaDiagonal1, sumaDiagonal2, sumaFila, sumaColumna, sumaMagica;
         sumaMagica = 15;
@@ -57,22 +77,22 @@ public class Ejercicio6 {
         if (valido == true){
             sumaDiagonal1 = 0;
             sumaDiagonal2 = 0;
-            for (int i = 0; i < tamanio; i++) {
+            for (int i = 0; i < 3; i++) {
                 sumaFila = 0 ;
                 sumaColumna = 0;
             
-            for (int j = 0; j < tamanio; j++) {
+            for (int j = 0; j < 3; j++) {
                 sumaFila += matriz[i][j];
-                sumaColumna += matriz[i][j];
+                sumaColumna += matriz[j][i];
                 if(i == j){
                     sumaDiagonal1 += matriz[i][j];
                 }
-                if(i+j == tamanio -1){
+                if(i+j == 3-1){
                     sumaDiagonal2 += matriz[i][j];
                 }
                 
             }
-            if ((sumaColumna != sumaMagica) && (sumaFila != sumaMagica)){
+            if (sumaColumna != sumaMagica && sumaFila != sumaMagica){
             
             valido = false;
             }
